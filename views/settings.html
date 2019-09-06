@@ -1,0 +1,24 @@
+{{# show_regform }}
+    {{> regform }}
+{{/ show_regform }}
+<div class="smartcat-connector wrap">
+    <h1 class="wp-heading-inline">{{ texts.title }}</h1>
+    <hr class="wp-header-end" />
+
+    {{# saved }}
+    <div id=”message” class="updated settings-error notice is-dismissible">
+        <p><strong>{{ texts.message }}</strong></p>
+    </div>
+    {{/ saved }}
+
+    <div class="form-wrap">
+        <form method="post" action="options.php">
+            {{& fields }}
+            {{& sections }}
+            <p class="submit">
+                <button type="submit" class="button-primary"><div class="sc-spinner"></div>{{ texts.save_changes }}</button>
+                <input type="hidden" name="sc_validate_settings_nonce" value="{{ sc_validate_nonce }}" />
+            </p>
+        </form>
+    </div>
+</div>

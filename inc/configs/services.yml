@@ -1,0 +1,117 @@
+services:
+  core.db:
+    class: SmartCAT\WP\DB\DB
+    tags: [installable]
+
+  core.options:
+    class: SmartCAT\WP\WP\Options
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [installable]
+
+  core.cron.send:
+    class: SmartCAT\WP\Cron\SendToSmartCAT
+    tags: [installable, cron]
+
+  core.cron.check:
+    class: SmartCAT\WP\Cron\CheckProjectsStatus
+    tags: [installable, cron]
+
+  core.cron.clear:
+    class: SmartCAT\WP\Cron\ClearDeletedProject
+    tags: [installable, cron]
+
+  core.admin.columns:
+    class: SmartCAT\WP\Admin\AdditionalActions
+    tags: [hook]
+
+  core.admin.settings:
+    class: SmartCAT\WP\Admin\Menu
+    tags: [initable]
+
+  core.admin.statistics:
+    class: SmartCAT\WP\Admin\Statistics
+    tags: [initable]
+
+  core.admin.frontend:
+    class: SmartCAT\WP\Admin\Frontend
+    tags: [hook]
+
+  core.admin.ajax:
+    class: SmartCAT\WP\Admin\Ajax
+    tags: [hook]
+
+  core.admin.statistics_ajax:
+    class: SmartCAT\WP\Admin\StatisticsAjax
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [hook]
+
+  core.admin.events:
+    class: SmartCAT\WP\Admin\Events
+    tags: [hook]
+
+  core.notice:
+    class: SmartCAT\WP\WP\Notice
+    tags: [initable]
+
+  callback.handler.smartcat:
+    class: SmartCAT\WP\Handler\SmartCATCallbackHandler
+    tags: [installable, hook]
+
+  entity.repository.task:
+    class: SmartCAT\WP\DB\Repository\TaskRepository
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [repositories]
+
+  entity.repository.statistic:
+    class: SmartCAT\WP\DB\Repository\StatisticRepository
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [repositories]
+
+  entity.repository.error:
+    class: SmartCAT\WP\DB\Repository\ErrorRepository
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [repositories]
+
+  entity.repository.event:
+    class: SmartCAT\WP\DB\Repository\EventRepository
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [repositories]
+
+  entity.repository.profile:
+    class: SmartCAT\WP\DB\Repository\ProfileRepository
+    arguments:
+      - "%plugin.table.prefix%"
+    tags: [repositories]
+
+  setup.tables:
+    class: SmartCAT\WP\DB\Setup\TablesSetup
+    tags: [setup]
+
+  update.tables:
+    class: SmartCAT\WP\DB\Setup\TablesUpdate
+    tags: [setup, update]
+
+  smartcat:
+    class: SmartCAT\WP\Helpers\SmartCAT
+    arguments:
+      - "%smartcat.api.login%"
+      - "%smartcat.api.password%"
+      - "%smartcat.api.server%"
+
+  cryptographer:
+      class: \SmartCAT\WP\Helpers\Cryptographer
+
+  templater:
+      class: \SmartCAT\WP\Helpers\TemplateEngine
+
+  language.converter:
+      class: \SmartCAT\WP\Helpers\Language\LanguageConverter
+
+  utils:
+      class: \SmartCAT\WP\Helpers\Utils
