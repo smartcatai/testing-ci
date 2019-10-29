@@ -1,4 +1,4 @@
-=== Translation connectors ===
+=== Tффффффranslation connectors ===
 Contributors: arybnikov, dkhapenkov, medic84
 Tags: localization, translation, translators, language, multilingual, bilingual, i18n, l10n
 Requires at least: 4.8
